@@ -67,6 +67,10 @@ static double const kDefaultRadiusInMeters = 10000;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.headerView setBackgroundColor:[UIColor whiteColor]];
+    [self.headerView setAlpha:0.8f];
+    
     [self.settingsButton.titleLabel setFont:[UIFont systemFontOfSize:22.0f]];
     [self.settingsButton setTitleColor:[UIColor rflMediumBlueColor] forState:UIControlStateNormal];
     [self.settingsButton setTitleColor:[UIColor rflHighlightedBlueColor] forState:UIControlStateHighlighted];
@@ -77,6 +81,7 @@ static double const kDefaultRadiusInMeters = 10000;
     [self.currentLocationButton setTitleColor:[UIColor rflHighlightedBlueColor] forState:UIControlStateHighlighted];
     [self.currentLocationButton setGlyphNamed:@"fontawesome##location-arrow"];
     
+    [self.listButton.titleLabel setFont:[UIFont boldSystemFontOfSize:22.0f]];
     [self.listButton setGlyphNamed:@"fontawesome##external-link"];
     [self.listButton addTarget:self action:@selector(listButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
