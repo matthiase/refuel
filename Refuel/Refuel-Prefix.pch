@@ -11,4 +11,13 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+    #import <SystemConfiguration/SystemConfiguration.h>
+    #import <MobileCoreServices/MobileCoreServices.h>
+
+    // Do not log when not running in DEBUG mode.  This works because a define without a substitution will
+    // delete anything that matches the define.
+    #ifndef DEBUG
+    #define NSLog(fmt,...)
+    #endif
+
 #endif
