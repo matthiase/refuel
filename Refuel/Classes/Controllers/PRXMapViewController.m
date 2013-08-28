@@ -81,7 +81,13 @@ static double const kDefaultRadiusInMeters = 10000;
     [self.currentLocationButton setTitleColor:[UIColor rflHighlightedBlueColor] forState:UIControlStateHighlighted];
     [self.currentLocationButton setGlyphNamed:@"fontawesome##location-arrow"];
     
+    [self.refreshButton setAlpha:0.8f];
+    [self.refreshButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
     [self.listButton.titleLabel setFont:[UIFont boldSystemFontOfSize:22.0f]];
+    [self.listButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [self.listButton setAlpha:0.8f];
+    [self.listButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.listButton setGlyphNamed:@"fontawesome##external-link"];
     [self.listButton addTarget:self action:@selector(listButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
