@@ -23,21 +23,19 @@
     UITextField *activeTextField;
     NSDictionary *defaults;
 }
-@property (weak, nonatomic) IBOutlet UIButton *settingsButton;
-@property (weak, nonatomic) IBOutlet UIButton *currentLocationButton;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) IBOutlet UIButton *refreshButton;
 @property (weak, nonatomic) IBOutlet UIButton *listButton;
-@property (weak, nonatomic) IBOutlet UITextField *searchField;
-@property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (strong, nonatomic) UITextField *searchTextField;
 
 @property (strong, nonatomic) NSArray *searchResults;
 @property (nonatomic) BOOL needsRefresh;
 
-- (IBAction)updateLocation:(id)sender;
-- (IBAction)toggleSideMenu:(id)sender;
-- (IBAction)refreshButtonClicked:(id)sender;
+- (void)updateLocation:(id)sender;
+- (void)settingsButtonPressed:(id)sender;
+- (void)refreshButtonClicked:(id)sender;
 @end
 
 
@@ -68,21 +66,59 @@ static double const kDefaultRadiusInMeters = 10000;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.headerView setBackgroundColor:[UIColor whiteColor]];
-    [self.headerView setAlpha:0.8f];
+    UIBarButtonItem *negativeSeperator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    negativeSeperator.width = -8;
     
-    [self.settingsButton.titleLabel setFont:[UIFont systemFontOfSize:22.0f]];
-    [self.settingsButton setTitleColor:[UIColor rflMediumBlueColor] forState:UIControlStateNormal];
-    [self.settingsButton setTitleColor:[UIColor rflHighlightedBlueColor] forState:UIControlStateHighlighted];
-    [self.settingsButton setGlyphNamed:@"fontawesome##reorder"];
+    UIButton *settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [settingsButton setFrame:CGRectMake(0.0, 0.0f, 30.0f, 30.0f)];
+    [settingsButton.titleLabel setFont:[UIFont systemFontOfSize:20.0f]];
+    [settingsButton setTitleColor:[UIColor rflMediumBlueColor] forState:UIControlStateNormal];
+    [settingsButton setTitleColor:[UIColor rflHighlightedBlueColor] forState:UIControlStateHighlighted];
+    [settingsButton setGlyphNamed:@"fontawesome##reorder"];
+    [settingsButton addTarget:self action:@selector(settingsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *settingsButtonItem = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
     
-    [self.currentLocationButton.titleLabel setFont:[UIFont systemFontOfSize:20.0f]];
-    [self.currentLocationButton setTitleColor:[UIColor rflMediumBlueColor] forState:UIControlStateNormal];
-    [self.currentLocationButton setTitleColor:[UIColor rflHighlightedBlueColor] forState:UIControlStateHighlighted];
-    [self.currentLocationButton setGlyphNamed:@"fontawesome##location-arrow"];
+    UIBarButtonItem *spacerLeft = [[UIBarButtonItem alloc]
+                                   initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                   target:nil
+                                   action:nil];
+    
+    UIView *spacerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 8)];
+    self.searchTextField = [[UITextField alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 240.0f, 31.0f)];
+    [self.searchTextField setBorderStyle:UITextBorderStyleNone];
+    [self.searchTextField setContentVerticalAlignment: UIControlContentVerticalAlignmentCenter];
+    [self.searchTextField setLeftViewMode:UITextFieldViewModeAlways];
+    [self.searchTextField setLeftView:spacerView];
+    [self.searchTextField setClearButtonMode:UITextFieldViewModeWhileEditing];
+    [self.searchTextField setPlaceholder:@"Search"];
+    [self.searchTextField.layer setBorderColor:[UIColor rflHighlightedBlueColor].CGColor];
+    [self.searchTextField.layer setBorderWidth:1.0f];
+    
+    [self.searchTextField setDelegate:self];
+    
+    UIBarButtonItem *searchItem = [[UIBarButtonItem alloc] initWithCustomView:self.searchTextField];
+    
+    UIBarButtonItem *spacerRight = [[UIBarButtonItem alloc]
+                                   initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                   target:nil
+                                   action:nil];
+    
+    UIButton *currentLocationButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [currentLocationButton setFrame:CGRectMake(0.0, 0.0f, 30.0f, 30.0f)];    
+    [currentLocationButton.titleLabel setFont:[UIFont systemFontOfSize:20.0f]];
+    [currentLocationButton setTitleColor:[UIColor rflMediumBlueColor] forState:UIControlStateNormal];
+    [currentLocationButton setTitleColor:[UIColor rflHighlightedBlueColor] forState:UIControlStateHighlighted];
+    [currentLocationButton setGlyphNamed:@"fontawesome##location-arrow"];
+    [currentLocationButton addTarget:self action:@selector(updateLocation:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *currentLocationButtonItem = [[UIBarButtonItem alloc] initWithCustomView:currentLocationButton];
+    
+    NSArray *toolbarItems = @[negativeSeperator, settingsButtonItem, spacerLeft, searchItem, spacerRight, currentLocationButtonItem, negativeSeperator];
+    [self.toolbar setItems:toolbarItems animated:YES];
+    [self.toolbar setTintColor:[UIColor whiteColor]];
     
     [self.refreshButton setAlpha:0.8f];
     [self.refreshButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.refreshButton addTarget:self action:@selector(refreshButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.listButton.titleLabel setFont:[UIFont boldSystemFontOfSize:22.0f]];
     [self.listButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
@@ -107,13 +143,13 @@ static double const kDefaultRadiusInMeters = 10000;
                                                  action:@selector(didPinchMap:)];
     [pinchRecognizer setDelegate:self];
     [self.mapView addGestureRecognizer:pinchRecognizer];
+    [self.mapView setDelegate:self];
     
     // Initialize the location manager.
     locationManager = [[CLLocationManager alloc] init];
     [locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
     [locationManager setDistanceFilter:kDistanceFilter];
-    [locationManager setDelegate:self];
-    
+    [locationManager setDelegate:self];    
     
     [[PRXPreferences sharedInstance] addObserver:self forKeyPath:@"fuels" options:0 context:nil];
     
@@ -143,8 +179,6 @@ static double const kDefaultRadiusInMeters = 10000;
                                    action:@selector(dismissKeyboard:)];
     [tap setDelegate:self];
     [self.mapView addGestureRecognizer:tap];
-    //[self.settingsButton addGestureRecognizer:tap];
-    //[self.currentLocationButton addGestureRecognizer:tap];
     
     // Let's get this party started.
     [self updateLocation:nil];
@@ -154,9 +188,9 @@ static double const kDefaultRadiusInMeters = 10000;
 - (void)viewDidLayoutSubviews {
     // TODO: this should only be performed once.
     CALayer *layer = [CALayer layer];
-    layer.frame = CGRectMake(0.0f, self.headerView.bounds.size.height - 1, self.headerView.bounds.size.width, 1.0f);
-    [layer setBackgroundColor:[UIColor rflLightGrayColor].CGColor];
-    [self.headerView.layer addSublayer:layer];
+    layer.frame = CGRectMake(0.0f, self.toolbar.bounds.size.height - 1, self.toolbar.bounds.size.width, 1.0f);
+    [layer setBackgroundColor:[UIColor lightGrayColor].CGColor];
+    [self.toolbar.layer addSublayer:layer];
     
 }
 
@@ -231,7 +265,7 @@ static double const kDefaultRadiusInMeters = 10000;
 - (void)didBecomeActive:(NSNotification *)notification {
     // Only show the current location if that was the state the application was in when
     // it went into the background.
-    if ([self.searchField.text isEqualToString:kCurrentLocation]) {
+    if ([self.searchTextField.text isEqualToString:kCurrentLocation]) {
         [self.mapView setShowsUserLocation:YES];
     }
 }
@@ -261,25 +295,25 @@ static double const kDefaultRadiusInMeters = 10000;
 }
 
 
-- (IBAction)updateLocation:(id)sender {
+- (void)updateLocation:(id)sender {
     [locationManager startUpdatingLocation];
 }
 
-- (IBAction)toggleSideMenu:(id)sender {
+- (void)settingsButtonPressed:(id)sender {
     [self.menuContainerViewController toggleLeftSideMenuCompletion:nil];
 }
 
-- (IBAction)refreshButtonClicked:(id)sender {
-    [self updateAnnotationsForRegion:self.mapView.region];    
+- (void)refreshButtonClicked:(id)sender {
+    [self updateAnnotationsForRegion:self.mapView.region];
 }
 
 
-# pragma mark - CLLocationManagerDelegate methods
+# pragma mark - CLLocationManagerDelegate
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     [self.mapView setShowsUserLocation: YES];
     CLLocation *currentLocation = [locations lastObject];
-    self.searchField.text = kCurrentLocation;
+    self.searchTextField.text = kCurrentLocation;
     [locationManager stopUpdatingLocation];
     [self centerMapOnLocation:currentLocation withRadius:kDefaultRadiusInMeters];
 }
@@ -297,6 +331,7 @@ static double const kDefaultRadiusInMeters = 10000;
     double factor = ABS(cos(2 * M_PI * region.center.latitude / 360.0));    
     double latitudeDeltaInMiles = region.span.latitudeDelta * 69.0;
     double longitudeDeltaInMiles = region.span.longitudeDelta * 69.0 * factor;
+    // TODO: the radius is not always calulated correctly.
     double radiusInMiles = latitudeDeltaInMiles > longitudeDeltaInMiles ? latitudeDeltaInMiles : longitudeDeltaInMiles;
     
     NSLog(@"REQUESTING FUEL STATIONS FROM API\nLATITUDE DELTA: %f\nLONGITUDE DELTA: %f\nRADIUS: %f miles", region.span.latitudeDelta, region.span.longitudeDelta, radiusInMiles);
@@ -306,7 +341,6 @@ static double const kDefaultRadiusInMeters = 10000;
     NSString *path = @"alt-fuel-stations/v1/nearest.json";
     //float radiusInMiles = kDefaultRadiusInMeters * 0.000621371;
     
-    // TODO: Fuel type parameter is not being recognized.
     NSDictionary *params = @{@"api_key": @"2cb264fc3ffee5c6aff826a024ffb4fd637e52e0",
                              @"latitude": [NSNumber numberWithFloat:region.center.latitude],
                              @"longitude": [NSNumber numberWithFloat:region.center.longitude],
@@ -399,7 +433,7 @@ static double const kDefaultRadiusInMeters = 10000;
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     NSLog(@"Search field became active.");
     activeTextField = textField;
-    if (activeTextField == self.searchField && [activeTextField.text isEqualToString:kCurrentLocation]) {
+    if (activeTextField == self.searchTextField && [activeTextField.text isEqualToString:kCurrentLocation]) {
         activeTextField.text = @"";
         [activeTextField becomeFirstResponder];
     }
