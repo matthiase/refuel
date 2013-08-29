@@ -41,7 +41,7 @@
 
 @implementation PRXMapViewController
 
-static NSString *const kCurrentLocation = @"Current Location";
+static NSString *const kCurrentLocation = @"";
 static NSInteger const kDistanceFilter = 1000;
 static double const kDefaultRadiusInMeters = 10000;
 
