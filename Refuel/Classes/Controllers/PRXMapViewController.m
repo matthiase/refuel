@@ -93,7 +93,7 @@ static double const kDefaultRadiusInMeters = 10000;
     [self.searchTextField setPlaceholder:@"Search"];
     [self.searchTextField.layer setBorderColor:[UIColor rflHighlightedBlueColor].CGColor];
     [self.searchTextField.layer setBorderWidth:1.0f];
-    
+    [self.searchTextField setReturnKeyType:UIReturnKeySearch];
     [self.searchTextField setDelegate:self];
     
     UIBarButtonItem *searchItem = [[UIBarButtonItem alloc] initWithCustomView:self.searchTextField];
