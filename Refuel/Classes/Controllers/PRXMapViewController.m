@@ -84,14 +84,14 @@ static double const kDefaultRadiusInMeters = 10000;
                                    action:nil];
     
     UIView *spacerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 8)];
-    self.searchTextField = [[UITextField alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 240.0f, 31.0f)];
+    self.searchTextField = [[UITextField alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 240.0f, 28.0f)];
     [self.searchTextField setBorderStyle:UITextBorderStyleNone];
     [self.searchTextField setContentVerticalAlignment: UIControlContentVerticalAlignmentCenter];
     [self.searchTextField setLeftViewMode:UITextFieldViewModeAlways];
     [self.searchTextField setLeftView:spacerView];
     [self.searchTextField setClearButtonMode:UITextFieldViewModeWhileEditing];
     [self.searchTextField setPlaceholder:@"Search"];
-    [self.searchTextField.layer setBorderColor:[UIColor rflHighlightedBlueColor].CGColor];
+    [self.searchTextField.layer setBorderColor:[UIColor rflLightGrayColor].CGColor];
     [self.searchTextField.layer setBorderWidth:1.0f];
     [self.searchTextField setReturnKeyType:UIReturnKeySearch];
     [self.searchTextField setDelegate:self];
@@ -290,6 +290,11 @@ static double const kDefaultRadiusInMeters = 10000;
 }
 
 
+- (void)stationDisclosureButtonPressed:(id)sender {
+    [self performSegueWithIdentifier:@"presentDetailsView" sender:sender];
+}
+
+
 - (MFSideMenuContainerViewController *)menuContainerViewController {
     return (MFSideMenuContainerViewController *)self.navigationController.parentViewController;
 }
@@ -392,7 +397,9 @@ static double const kDefaultRadiusInMeters = 10000;
             annotationView.userInteractionEnabled = YES;
             [annotationView setCanShowCallout:YES];        
             UIButton *disclosureButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-            annotationView.rightCalloutAccessoryView = disclosureButton;
+            [disclosureButton addTarget:self action:@selector(stationDisclosureButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+            [annotationView setRightCalloutAccessoryView: disclosureButton];
+            
         }
         else {
             annotationView.annotation = annotation;

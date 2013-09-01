@@ -49,6 +49,7 @@
 		934FEC8117CD633D0091161D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 934FEC8017CD633D0091161D /* CoreLocation.framework */; };
 		934FEC8317CD634D0091161D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 934FEC8217CD634D0091161D /* MapKit.framework */; };
 		934FEC8517CD63820091161D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 934FEC8417CD63820091161D /* QuartzCore.framework */; };
+		935797E817D305EF007FB8E7 /* PRXDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 935797E717D305EF007FB8E7 /* PRXDetailsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,6 +121,8 @@
 		934FEC8017CD633D0091161D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		934FEC8217CD634D0091161D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		934FEC8417CD63820091161D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		935797E617D305EF007FB8E7 /* PRXDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRXDetailsViewController.h; sourceTree = "<group>"; };
+		935797E717D305EF007FB8E7 /* PRXDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRXDetailsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,7 +148,6 @@
 		934FEBE317CD5FCB0091161D = {
 			isa = PBXGroup;
 			children = (
-				934FEC8417CD63820091161D /* QuartzCore.framework */,
 				934FEC7317CD61120091161D /* icon@2x.png */,
 				934FEC7117CD610D0091161D /* icon.png */,
 				934FEC3F17CD60DB0091161D /* Vendor */,
@@ -166,6 +168,7 @@
 		934FEBEE17CD5FCB0091161D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				934FEC8417CD63820091161D /* QuartzCore.framework */,
 				934FEC8217CD634D0091161D /* MapKit.framework */,
 				934FEC8017CD633D0091161D /* CoreLocation.framework */,
 				934FEC7E17CD63360091161D /* CoreText.framework */,
@@ -225,12 +228,14 @@
 		934FEC1917CD60B70091161D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				934FEC1E17CD60B70091161D /* PRXSideMenuViewController.h */,
+				934FEC1F17CD60B70091161D /* PRXSideMenuViewController.m */,
 				934FEC1A17CD60B70091161D /* PRXMapViewController.h */,
 				934FEC1B17CD60B70091161D /* PRXMapViewController.m */,
 				934FEC1C17CD60B70091161D /* PRXResultsViewController.h */,
 				934FEC1D17CD60B70091161D /* PRXResultsViewController.m */,
-				934FEC1E17CD60B70091161D /* PRXSideMenuViewController.h */,
-				934FEC1F17CD60B70091161D /* PRXSideMenuViewController.m */,
+				935797E617D305EF007FB8E7 /* PRXDetailsViewController.h */,
+				935797E717D305EF007FB8E7 /* PRXDetailsViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -439,6 +444,7 @@
 				934FEC6A17CD60DB0091161D /* UIImageView+AFNetworking.m in Sources */,
 				934FEC6F17CD60DB0091161D /* MFSideMenuContainerViewController.m in Sources */,
 				934FEC7017CD60DB0091161D /* WTGlyphFontSet.m in Sources */,
+				935797E817D305EF007FB8E7 /* PRXDetailsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -553,6 +559,7 @@
 				934FEC1117CD5FCC0091161D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

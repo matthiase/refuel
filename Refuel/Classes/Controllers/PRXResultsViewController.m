@@ -70,7 +70,7 @@
     // TODO: this should only be performed once.
     CALayer *layer = [CALayer layer];
     layer.frame = CGRectMake(0.0f, self.toolbar.bounds.size.height - 1, self.toolbar.bounds.size.width, 1.0f);
-    [layer setBackgroundColor:[UIColor rflLightGrayColor].CGColor];
+    [layer setBackgroundColor:[UIColor lightGrayColor].CGColor];
     [self.toolbar.layer addSublayer:layer];
 }
 

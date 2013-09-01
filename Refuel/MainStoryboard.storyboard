@@ -127,11 +127,39 @@
                         <outlet property="refreshButton" destination="ZXC-25-ro3" id="DVa-oU-ykW"/>
                         <outlet property="toolbar" destination="3u7-CM-Dm0" id="nCn-R2-EjW"/>
                         <segue destination="UVF-wn-i8g" kind="modal" identifier="presentResultsView" id="mQJ-Cd-5fJ"/>
+                        <segue destination="2nH-VP-jcg" kind="modal" identifier="presentDetailsView" modalTransitionStyle="flipHorizontal" id="nA7-rB-o70"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="83f-IC-ryo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3" y="405"/>
+        </scene>
+        <!--Details View Controller-->
+        <scene sceneID="Mrl-Nq-pBq">
+            <objects>
+                <viewController id="2nH-VP-jcg" customClass="PRXDetailsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zom-tO-BxM">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gCe-0k-LON">
+                                <items/>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gCe-0k-LON" firstAttribute="leading" secondItem="zom-tO-BxM" secondAttribute="leading" type="default" id="0wv-Et-JfL"/>
+                            <constraint firstItem="gCe-0k-LON" firstAttribute="trailing" secondItem="zom-tO-BxM" secondAttribute="trailing" type="default" id="Lsn-ta-3fx"/>
+                            <constraint firstItem="gCe-0k-LON" firstAttribute="top" secondItem="zom-tO-BxM" secondAttribute="top" type="default" id="x5L-fy-b0M"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="toolbar" destination="gCe-0k-LON" id="Tzx-ww-TQh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XKT-5f-xbI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1259" y="979"/>
         </scene>
         <!--Results View Controller-->
         <scene sceneID="d8L-YZ-B7A">
@@ -167,6 +195,9 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <connections>
+                                            <segue destination="2nH-VP-jcg" kind="modal" modalTransitionStyle="flipHorizontal" id="xob-5f-tF5"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -193,7 +224,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bUc-ts-vyh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="498" y="405"/>
+            <point key="canvasLocation" x="722" y="201"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qIk-zT-p6W">
@@ -216,4 +247,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="nA7-rB-o70"/>
+    </inferredMetricsTieBreakers>
 </document>
