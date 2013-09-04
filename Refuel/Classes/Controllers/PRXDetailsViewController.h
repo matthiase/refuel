@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface PRXDetailsViewController : UIViewController
-
+@property NSDictionary *stationInfo;
 @end

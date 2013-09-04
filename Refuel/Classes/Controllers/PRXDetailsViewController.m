@@ -12,6 +12,10 @@
 
 @interface PRXDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (weak, nonatomic) IBOutlet UIImageView *streetImageView;
+@property (weak, nonatomic) IBOutlet UILabel *stationInfoLabel;
+@property (weak, nonatomic) IBOutlet UILabel *stationDistanceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *stationPhoneNumberLabel;
 @end
 
 @implementation PRXDetailsViewController
@@ -62,6 +66,27 @@
     [self.toolbar setTintColor:[UIColor whiteColor]];
     [self.toolbar setItems:toolbarItems animated:YES];
     
+    [self.stationInfoLabel setNumberOfLines:0];
+    NSArray *stationInfoLines = [NSArray arrayWithObjects:
+                                 [self.stationInfo objectForKey:@"station_name"],
+                                 [self.stationInfo objectForKey:@"street_address"],
+                                 [NSString stringWithFormat:@"%@, %@ %@",
+                                    [self.stationInfo objectForKey:@"city"],
+                                    [self.stationInfo objectForKey:@"state"],
+                                    [self.stationInfo objectForKey:@"zip"]                                      
+                                  ]
+                                 , nil];
+            
+    [self.stationInfoLabel setText:[stationInfoLines componentsJoinedByString:@"\n"]];    
+    [self.stationInfoLabel sizeToFit];
+    
+    NSNumberFormatter *distanceFormatter = [[NSNumberFormatter alloc] init];
+    [distanceFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    [distanceFormatter setMaximumFractionDigits:2];    
+    [distanceFormatter setRoundingMode: NSNumberFormatterRoundUp];
+    [self.stationDistanceLabel setText:[distanceFormatter stringFromNumber:[self.stationInfo objectForKey:@"distance"]]];
+    
+    [self.stationPhoneNumberLabel setText:[self.stationInfo objectForKey:@"station_phone"]];
 }
 
 

@@ -7,6 +7,7 @@
 //
 
 #import "PRXResultsViewController.h"
+#import "PRXDetailsViewController.h"
 #import "UIColor+Custom.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -72,6 +73,15 @@
     layer.frame = CGRectMake(0.0f, self.toolbar.bounds.size.height - 1, self.toolbar.bounds.size.width, 1.0f);
     [layer setBackgroundColor:[UIColor lightGrayColor].CGColor];
     [self.toolbar.layer addSublayer:layer];
+}
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"presentDetailsView"]) {
+        PRXDetailsViewController *destinationController = [segue destinationViewController];
+        NSIndexPath *selectedIndex = [self.tableView indexPathForSelectedRow];
+        [destinationController setStationInfo:[self.results objectAtIndex:selectedIndex.row]];
+    }
 }
 
 

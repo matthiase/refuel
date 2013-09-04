@@ -8,6 +8,7 @@
 
 #import "PRXMapViewController.h"
 #import "PRXResultsViewController.h"
+#import "PRXDetailsViewController.h"
 #import "PRXPreferences.h"
 #import "PRXAnnotation.h"
 #import "PRXFuelType.h"
@@ -200,6 +201,14 @@ static double const kDefaultRadiusInMeters = 10000;
         PRXResultsViewController *destination = [segue destinationViewController];
         [destination setResults:self.searchResults];
     }
+    else if([segue.identifier isEqualToString:@"presentDetailsView"]) {
+        NSArray *selections = [self.mapView selectedAnnotations];
+        if (selections.count > 0) {
+            PRXAnnotation *selectedAnnotation = selections[0];
+            PRXDetailsViewController *detailsController = [segue destinationViewController];
+            [detailsController setStationInfo:[selectedAnnotation stationInfo]];
+        }
+    }
 }
 
 
@@ -286,7 +295,7 @@ static double const kDefaultRadiusInMeters = 10000;
 
 
 - (void)listButtonPressed:(id)sender {
-    [self performSegueWithIdentifier:@"presentResultsView" sender:nil];
+    [self performSegueWithIdentifier:@"presentResultsView" sender:sender];
 }
 
 
@@ -371,6 +380,7 @@ static double const kDefaultRadiusInMeters = 10000;
                                    station[@"street_address"],
                                    station[@"city"],
                                    station[@"state"]];
+            [annotation setStationInfo:station];
             [annotations addObject:annotation];
         }
         [self.mapView addAnnotations:annotations];
@@ -391,11 +401,11 @@ static double const kDefaultRadiusInMeters = 10000;
         annotationView = (MKPinAnnotationView *) [self.mapView dequeueReusableAnnotationViewWithIdentifier: identifier];
         if (!annotationView) {
             annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier: identifier];
-            annotationView.pinColor = MKPinAnnotationColorRed;
+            annotationView.pinColor = MKPinAnnotationColorGreen;
             //annotationView.image=[UIImage imageNamed:@"arrest.png"] ;
             [annotationView setEnabled:YES];
             annotationView.userInteractionEnabled = YES;
-            [annotationView setCanShowCallout:YES];        
+            [annotationView setCanShowCallout:YES];
             UIButton *disclosureButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
             [disclosureButton addTarget:self action:@selector(stationDisclosureButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
             [annotationView setRightCalloutAccessoryView: disclosureButton];

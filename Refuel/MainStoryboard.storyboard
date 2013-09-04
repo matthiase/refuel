@@ -145,15 +145,75 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gCe-0k-LON">
                                 <items/>
                             </toolbar>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="wH5-K0-eLC">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="7Dr-6a-Lko"/>
+                                </constraints>
+                                <string key="text">[Station Name]
+[Street Address]
+[City, State, Zip]</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="999.99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Pu-bF-vT7">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="33" id="RSV-xw-Afj"/>
+                                    <constraint firstAttribute="width" constant="72" id="pQA-Pi-8p3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="MILES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UgW-zp-ZE2">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Kvc-2F-04q"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PK0-FQ-N5M">
+                                <color key="backgroundColor" red="0.93333339689999995" green="0.93333339689999995" blue="0.93333339689999995" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="129" id="eFc-bM-g5g"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="(555)-555-1234" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpV-n5-4wc">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="DBI-JJ-Iy7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="wH5-K0-eLC" firstAttribute="leading" secondItem="zom-tO-BxM" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="0O8-yF-bc9"/>
                             <constraint firstItem="gCe-0k-LON" firstAttribute="leading" secondItem="zom-tO-BxM" secondAttribute="leading" type="default" id="0wv-Et-JfL"/>
+                            <constraint firstItem="UgW-zp-ZE2" firstAttribute="top" secondItem="zom-tO-BxM" secondAttribute="top" constant="208" id="5m5-22-SzI"/>
+                            <constraint firstItem="UgW-zp-ZE2" firstAttribute="leading" secondItem="wH5-K0-eLC" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="BQE-fi-GZl"/>
+                            <constraint firstAttribute="trailing" secondItem="UgW-zp-ZE2" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Bjy-wW-6pg"/>
+                            <constraint firstAttribute="trailing" secondItem="2Pu-bF-vT7" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="EqW-vl-6uc"/>
+                            <constraint firstItem="PK0-FQ-N5M" firstAttribute="top" secondItem="gCe-0k-LON" secondAttribute="bottom" type="default" id="Fel-6S-rmw"/>
+                            <constraint firstItem="gCe-0k-LON" firstAttribute="top" secondItem="zom-tO-BxM" secondAttribute="top" type="default" id="HoO-y2-QtC"/>
                             <constraint firstItem="gCe-0k-LON" firstAttribute="trailing" secondItem="zom-tO-BxM" secondAttribute="trailing" type="default" id="Lsn-ta-3fx"/>
-                            <constraint firstItem="gCe-0k-LON" firstAttribute="top" secondItem="zom-tO-BxM" secondAttribute="top" type="default" id="x5L-fy-b0M"/>
+                            <constraint firstItem="2Pu-bF-vT7" firstAttribute="leading" secondItem="wH5-K0-eLC" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="OsS-M2-Kd9"/>
+                            <constraint firstItem="2Pu-bF-vT7" firstAttribute="top" secondItem="PK0-FQ-N5M" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="PGi-bJ-vgK"/>
+                            <constraint firstItem="PK0-FQ-N5M" firstAttribute="leading" secondItem="zom-tO-BxM" secondAttribute="leading" type="default" id="Uce-gX-Mbu"/>
+                            <constraint firstItem="wH5-K0-eLC" firstAttribute="top" secondItem="PK0-FQ-N5M" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="bp0-0u-5z1"/>
+                            <constraint firstItem="PK0-FQ-N5M" firstAttribute="trailing" secondItem="zom-tO-BxM" secondAttribute="trailing" type="default" id="fGD-yG-TGf"/>
+                            <constraint firstAttribute="trailing" secondItem="cpV-n5-4wc" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="fMW-6c-gvm"/>
+                            <constraint firstAttribute="bottom" secondItem="cpV-n5-4wc" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="ocL-2l-ToR"/>
+                            <constraint firstItem="cpV-n5-4wc" firstAttribute="leading" secondItem="zom-tO-BxM" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="zqa-bW-Xhn"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="stationDistanceLabel" destination="2Pu-bF-vT7" id="D1W-fY-alk"/>
+                        <outlet property="stationInfoLabel" destination="wH5-K0-eLC" id="2xm-Di-iDi"/>
+                        <outlet property="stationPhoneNumberLabel" destination="cpV-n5-4wc" id="OB3-4k-1YF"/>
+                        <outlet property="streetImageView" destination="PK0-FQ-N5M" id="BK5-xV-oYg"/>
                         <outlet property="toolbar" destination="gCe-0k-LON" id="Tzx-ww-TQh"/>
                     </connections>
                 </viewController>
@@ -196,7 +256,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
-                                            <segue destination="2nH-VP-jcg" kind="modal" modalTransitionStyle="flipHorizontal" id="xob-5f-tF5"/>
+                                            <segue destination="2nH-VP-jcg" kind="modal" identifier="presentDetailsView" modalTransitionStyle="flipHorizontal" id="xob-5f-tF5"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -242,6 +302,49 @@
             <point key="canvasLocation" x="-544" y="405"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="MFSideMenuContainerViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MFSideMenuContainerViewController.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="PRXDetailsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PRXDetailsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="dismissButtonPressed:"/>
+                <relationship kind="outlet" name="stationDistanceLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="stationInfoLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="stationPhoneNumberLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="streetImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="PRXMapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PRXMapViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="listButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="refreshButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="PRXResultsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PRXResultsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="dismissButtonPressed:"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="PRXSideMenuViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PRXSideMenuViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
