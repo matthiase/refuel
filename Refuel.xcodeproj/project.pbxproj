@@ -50,6 +50,7 @@
 		934FEC8317CD634D0091161D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 934FEC8217CD634D0091161D /* MapKit.framework */; };
 		934FEC8517CD63820091161D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 934FEC8417CD63820091161D /* QuartzCore.framework */; };
 		935797E817D305EF007FB8E7 /* PRXDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 935797E717D305EF007FB8E7 /* PRXDetailsViewController.m */; };
+		93C5A51317DBAA9700BF63A8 /* StreetViewClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C5A51217DBAA9700BF63A8 /* StreetViewClient.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -123,6 +124,8 @@
 		934FEC8417CD63820091161D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		935797E617D305EF007FB8E7 /* PRXDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRXDetailsViewController.h; sourceTree = "<group>"; };
 		935797E717D305EF007FB8E7 /* PRXDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRXDetailsViewController.m; sourceTree = "<group>"; };
+		93C5A51117DBAA9700BF63A8 /* StreetViewClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreetViewClient.h; sourceTree = "<group>"; };
+		93C5A51217DBAA9700BF63A8 /* StreetViewClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreetViewClient.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +252,8 @@
 				934FEC2417CD60B70091161D /* NSArray+Map.m */,
 				934FEC2517CD60B70091161D /* UIColor+Custom.h */,
 				934FEC2617CD60B70091161D /* UIColor+Custom.m */,
+				93C5A51117DBAA9700BF63A8 /* StreetViewClient.h */,
+				93C5A51217DBAA9700BF63A8 /* StreetViewClient.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -445,6 +450,7 @@
 				934FEC6F17CD60DB0091161D /* MFSideMenuContainerViewController.m in Sources */,
 				934FEC7017CD60DB0091161D /* WTGlyphFontSet.m in Sources */,
 				935797E817D305EF007FB8E7 /* PRXDetailsViewController.m in Sources */,
+				93C5A51317DBAA9700BF63A8 /* StreetViewClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
