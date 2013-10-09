@@ -1,4 +1,4 @@
-refuel
+Refuel
 ======
 
-Locate alternative fuel stations using your iPhone.
+Find alternative fuel stations using your iPhone.
