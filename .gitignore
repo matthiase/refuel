@@ -20,3 +20,4 @@ DerivedData
 iosapp.xcodeproj/xcuserdata/**/*
 iosapp.xcodeproj/.LSOverride
 *.swo
+Keys.plist
