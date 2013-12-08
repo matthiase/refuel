@@ -7,7 +7,7 @@
 //
 
 /*
- curl -XGET "http://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=2cb264fc3ffee5c6aff826a024ffb4fd637e52e0&latitude=40.0150&longitude=-105.2700"
+ curl -XGET "http://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=YOUR_KEY_HERE&latitude=40.0150&longitude=-105.2700"
  */
 
 #import "NRELClient.h"
@@ -30,8 +30,7 @@ static NSString * const kServiceUrl = @"http://developer.nrel.gov/api";
 }
 
 
-+(void)connect
-{
++(void)connect {
     NSURL *baseUrl = [NSURL URLWithString:kServiceUrl];
     _sharedClient = [[[self class] alloc] initWithBaseURL:baseUrl];
 }

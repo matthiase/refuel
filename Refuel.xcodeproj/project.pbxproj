@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		93342E221854291900891D4A /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 93342E211854291900891D4A /* Keys.plist */; };
+		9335F6A917FFD85900C104C3 /* PRXLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9335F6A817FFD85900C104C3 /* PRXLabel.m */; };
 		934FEBF017CD5FCC0091161D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 934FEBEF17CD5FCC0091161D /* UIKit.framework */; };
 		934FEBF217CD5FCC0091161D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 934FEBF117CD5FCC0091161D /* Foundation.framework */; };
 		934FEBF417CD5FCC0091161D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 934FEBF317CD5FCC0091161D /* CoreGraphics.framework */; };
@@ -50,10 +52,16 @@
 		934FEC8317CD634D0091161D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 934FEC8217CD634D0091161D /* MapKit.framework */; };
 		934FEC8517CD63820091161D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 934FEC8417CD63820091161D /* QuartzCore.framework */; };
 		935797E817D305EF007FB8E7 /* PRXDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 935797E717D305EF007FB8E7 /* PRXDetailsViewController.m */; };
-		93C5A51317DBAA9700BF63A8 /* StreetViewClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C5A51217DBAA9700BF63A8 /* StreetViewClient.m */; };
+		93736FE417FF715C0011D6A2 /* StreetViewURLBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 93736FE317FF715C0011D6A2 /* StreetViewURLBuilder.m */; };
+		93D3D71B18050C630082F67B /* Icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93D3D70D18050C630082F67B /* Icon-40@2x.png */; };
+		93D3D71D18050C630082F67B /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93D3D70F18050C630082F67B /* Icon-60@2x.png */; };
+		93D3D72518050C630082F67B /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93D3D71718050C630082F67B /* Icon-Small@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		93342E211854291900891D4A /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
+		9335F6A717FFD85900C104C3 /* PRXLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRXLabel.h; sourceTree = "<group>"; };
+		9335F6A817FFD85900C104C3 /* PRXLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRXLabel.m; sourceTree = "<group>"; };
 		934FEBEC17CD5FCB0091161D /* Refuel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Refuel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		934FEBEF17CD5FCC0091161D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		934FEBF117CD5FCC0091161D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -124,8 +132,11 @@
 		934FEC8417CD63820091161D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		935797E617D305EF007FB8E7 /* PRXDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRXDetailsViewController.h; sourceTree = "<group>"; };
 		935797E717D305EF007FB8E7 /* PRXDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRXDetailsViewController.m; sourceTree = "<group>"; };
-		93C5A51117DBAA9700BF63A8 /* StreetViewClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreetViewClient.h; sourceTree = "<group>"; };
-		93C5A51217DBAA9700BF63A8 /* StreetViewClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreetViewClient.m; sourceTree = "<group>"; };
+		93736FE217FF715C0011D6A2 /* StreetViewURLBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreetViewURLBuilder.h; sourceTree = "<group>"; };
+		93736FE317FF715C0011D6A2 /* StreetViewURLBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreetViewURLBuilder.m; sourceTree = "<group>"; };
+		93D3D70D18050C630082F67B /* Icon-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40@2x.png"; sourceTree = "<group>"; };
+		93D3D70F18050C630082F67B /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
+		93D3D71718050C630082F67B /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +213,7 @@
 				934FEBF817CD5FCC0091161D /* InfoPlist.strings */,
 				934FEBFB17CD5FCC0091161D /* main.m */,
 				934FEBFD17CD5FCC0091161D /* Refuel-Prefix.pch */,
+				93342E211854291900891D4A /* Keys.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -209,6 +221,9 @@
 		934FEC1217CD60B70091161D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				93D3D70D18050C630082F67B /* Icon-40@2x.png */,
+				93D3D70F18050C630082F67B /* Icon-60@2x.png */,
+				93D3D71718050C630082F67B /* Icon-Small@2x.png */,
 				934FEC1317CD60B70091161D /* Default-568h@2x.png */,
 				934FEC1417CD60B70091161D /* Default.png */,
 				934FEC1517CD60B70091161D /* Default@2x.png */,
@@ -252,8 +267,10 @@
 				934FEC2417CD60B70091161D /* NSArray+Map.m */,
 				934FEC2517CD60B70091161D /* UIColor+Custom.h */,
 				934FEC2617CD60B70091161D /* UIColor+Custom.m */,
-				93C5A51117DBAA9700BF63A8 /* StreetViewClient.h */,
-				93C5A51217DBAA9700BF63A8 /* StreetViewClient.m */,
+				93736FE217FF715C0011D6A2 /* StreetViewURLBuilder.h */,
+				93736FE317FF715C0011D6A2 /* StreetViewURLBuilder.m */,
+				9335F6A717FFD85900C104C3 /* PRXLabel.h */,
+				9335F6A817FFD85900C104C3 /* PRXLabel.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -414,7 +431,11 @@
 				934FEC6C17CD60DB0091161D /* entypo.ttf in Resources */,
 				934FEC6D17CD60DB0091161D /* fontawesome.plist in Resources */,
 				934FEC6E17CD60DB0091161D /* fontawesome.ttf in Resources */,
+				93D3D72518050C630082F67B /* Icon-Small@2x.png in Resources */,
+				93342E221854291900891D4A /* Keys.plist in Resources */,
+				93D3D71B18050C630082F67B /* Icon-40@2x.png in Resources */,
 				934FEC7217CD610D0091161D /* icon.png in Resources */,
+				93D3D71D18050C630082F67B /* Icon-60@2x.png in Resources */,
 				934FEC7417CD61120091161D /* icon@2x.png in Resources */,
 				934FEC7917CD626E0091161D /* MainStoryboard.storyboard in Resources */,
 			);
@@ -438,7 +459,9 @@
 				934FEC3C17CD60B70091161D /* PRXFuelType.m in Sources */,
 				934FEC3D17CD60B70091161D /* PRXPreferences.m in Sources */,
 				934FEC3E17CD60B70091161D /* PRXAppDelegate.m in Sources */,
+				93736FE417FF715C0011D6A2 /* StreetViewURLBuilder.m in Sources */,
 				934FEC6217CD60DB0091161D /* AFHTTPClient.m in Sources */,
+				9335F6A917FFD85900C104C3 /* PRXLabel.m in Sources */,
 				934FEC6317CD60DB0091161D /* AFHTTPRequestOperation.m in Sources */,
 				934FEC6417CD60DB0091161D /* AFImageRequestOperation.m in Sources */,
 				934FEC6517CD60DB0091161D /* AFJSONRequestOperation.m in Sources */,
@@ -450,7 +473,6 @@
 				934FEC6F17CD60DB0091161D /* MFSideMenuContainerViewController.m in Sources */,
 				934FEC7017CD60DB0091161D /* WTGlyphFontSet.m in Sources */,
 				935797E817D305EF007FB8E7 /* PRXDetailsViewController.m in Sources */,
-				93C5A51317DBAA9700BF63A8 /* StreetViewClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,7 +515,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -511,13 +533,13 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Matthias Eder";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -527,9 +549,11 @@
 		934FEC1017CD5FCC0091161D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Refuel/Refuel-Prefix.pch";
 				INFOPLIST_FILE = "Refuel/Refuel-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -538,9 +562,11 @@
 		934FEC1117CD5FCC0091161D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Matthias Eder";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Refuel/Refuel-Prefix.pch";
 				INFOPLIST_FILE = "Refuel/Refuel-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

@@ -19,13 +19,6 @@
 {
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     
-    /*
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSData *defaultPreferences = [NSKeyedArchiver archivedDataWithRootObject:[PRXPreferences sharedInstance]];
-    NSDictionary *defaultValues = [NSDictionary dictionaryWithObject:defaultPreferences forKey:@"preferences"];
-    [userDefaults registerDefaults:defaultValues];
-    */
-    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:[NSBundle mainBundle]];
     MFSideMenuContainerViewController *container = (MFSideMenuContainerViewController *)self.window.rootViewController;
     UINavigationController *navigationController = [storyboard instantiateViewControllerWithIdentifier:@"NavigationController"];

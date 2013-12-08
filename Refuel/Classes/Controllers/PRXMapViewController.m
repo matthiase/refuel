@@ -24,12 +24,11 @@
     UITextField *activeTextField;
     NSDictionary *defaults;
 }
-@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
-@property (weak, nonatomic) IBOutlet UIButton *refreshButton;
-@property (weak, nonatomic) IBOutlet UIButton *listButton;
-@property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-@property (strong, nonatomic) UITextField *searchTextField;
+@property (nonatomic, strong) UIButton *refreshButton;
+@property (nonatomic, strong) UIButton *listButton;
+@property (nonatomic, strong) MKMapView *mapView;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) UITextField *searchTextField;
 
 @property (strong, nonatomic) NSArray *searchResults;
 @property (nonatomic) BOOL needsRefresh;
@@ -64,12 +63,57 @@ static double const kDefaultRadiusInMeters = 10000;
 }
 
 
+- (void)updateViewConstraints {
+    [super updateViewConstraints];
+    
+    [self.view addConstraints:[NSLayoutConstraint
+                               constraintsWithVisualFormat:@"H:|[_mapView]|"
+                               options:0
+                               metrics:nil
+                               views:NSDictionaryOfVariableBindings(_mapView)]];
+
+    [self.view addConstraints:[NSLayoutConstraint
+                               constraintsWithVisualFormat:@"V:|[_mapView]|"
+                               options:0
+                               metrics:nil
+                               views:NSDictionaryOfVariableBindings(_mapView)]];
+    
+    [self.view addConstraints:[NSLayoutConstraint
+                               constraintsWithVisualFormat:@"H:[_listButton(60)]-(8)-|"
+                               options:0
+                               metrics:nil
+                               views:NSDictionaryOfVariableBindings(_listButton)]];
+    
+    [self.view addConstraints:[NSLayoutConstraint
+                               constraintsWithVisualFormat:@"V:[_listButton(44)]-(8)-|"
+                               options:0
+                               metrics:nil
+                               views:NSDictionaryOfVariableBindings(_listButton)]];
+
+    [self.view addConstraints:[NSLayoutConstraint
+                               constraintsWithVisualFormat:@"H:|-(8)-[_refreshButton(60)]"
+                               options:0
+                               metrics:nil
+                               views:NSDictionaryOfVariableBindings(_refreshButton)]];
+    
+    [self.view addConstraints:[NSLayoutConstraint
+                               constraintsWithVisualFormat:@"V:[_refreshButton(44)]-(8)-|"
+                               options:0
+                               metrics:nil
+                               views:NSDictionaryOfVariableBindings(_refreshButton)]];
+    
+    // Ensure that the buttons are not hidden behind the map view.
+    [self.view bringSubviewToFront:self.listButton];
+    [self.view bringSubviewToFront:self.refreshButton];
+    
+}
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    UIBarButtonItem *negativeSeperator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    negativeSeperator.width = -8;
-    
+
+    // UINavigationBar initialization
     UIButton *settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [settingsButton setFrame:CGRectMake(0.0, 0.0f, 30.0f, 30.0f)];
     [settingsButton.titleLabel setFont:[UIFont systemFontOfSize:20.0f]];
@@ -77,15 +121,17 @@ static double const kDefaultRadiusInMeters = 10000;
     [settingsButton setTitleColor:[UIColor rflHighlightedBlueColor] forState:UIControlStateHighlighted];
     [settingsButton setGlyphNamed:@"fontawesome##reorder"];
     [settingsButton addTarget:self action:@selector(settingsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *settingsButtonItem = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
     
-    UIBarButtonItem *spacerLeft = [[UIBarButtonItem alloc]
-                                   initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                   target:nil
-                                   action:nil];
+    UIButton *currentLocationButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [currentLocationButton setFrame:CGRectMake(0.0, 0.0f, 30.0f, 30.0f)];
+    [currentLocationButton.titleLabel setFont:[UIFont systemFontOfSize:20.0f]];
+    [currentLocationButton setTitleColor:[UIColor rflMediumBlueColor] forState:UIControlStateNormal];
+    [currentLocationButton setTitleColor:[UIColor rflHighlightedBlueColor] forState:UIControlStateHighlighted];
+    [currentLocationButton setGlyphNamed:@"fontawesome##location-arrow"];
+    [currentLocationButton addTarget:self action:@selector(updateLocation:) forControlEvents:UIControlEventTouchUpInside];
     
     UIView *spacerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 8)];
-    self.searchTextField = [[UITextField alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 240.0f, 28.0f)];
+    self.searchTextField = [[UITextField alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 300.0f, 28.0f)];
     [self.searchTextField setBorderStyle:UITextBorderStyleNone];
     [self.searchTextField setContentVerticalAlignment: UIControlContentVerticalAlignmentCenter];
     [self.searchTextField setLeftViewMode:UITextFieldViewModeAlways];
@@ -97,37 +143,17 @@ static double const kDefaultRadiusInMeters = 10000;
     [self.searchTextField setReturnKeyType:UIReturnKeySearch];
     [self.searchTextField setDelegate:self];
     
-    UIBarButtonItem *searchItem = [[UIBarButtonItem alloc] initWithCustomView:self.searchTextField];
+    //[self.navigationController.navigationBar setTranslucent:NO];
+    [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:settingsButton]];
+    [self.navigationItem setTitleView:self.searchTextField];
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:currentLocationButton]];
+    [self.navigationItem setBackBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil]];
+    [self.navigationController setNavigationBarHidden:NO];
     
-    UIBarButtonItem *spacerRight = [[UIBarButtonItem alloc]
-                                   initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                   target:nil
-                                   action:nil];
     
-    UIButton *currentLocationButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [currentLocationButton setFrame:CGRectMake(0.0, 0.0f, 30.0f, 30.0f)];    
-    [currentLocationButton.titleLabel setFont:[UIFont systemFontOfSize:20.0f]];
-    [currentLocationButton setTitleColor:[UIColor rflMediumBlueColor] forState:UIControlStateNormal];
-    [currentLocationButton setTitleColor:[UIColor rflHighlightedBlueColor] forState:UIControlStateHighlighted];
-    [currentLocationButton setGlyphNamed:@"fontawesome##location-arrow"];
-    [currentLocationButton addTarget:self action:@selector(updateLocation:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *currentLocationButtonItem = [[UIBarButtonItem alloc] initWithCustomView:currentLocationButton];
-    
-    NSArray *toolbarItems = @[negativeSeperator, settingsButtonItem, spacerLeft, searchItem, spacerRight, currentLocationButtonItem, negativeSeperator];
-    [self.toolbar setItems:toolbarItems animated:YES];
-    [self.toolbar setTintColor:[UIColor whiteColor]];
-    
-    [self.refreshButton setAlpha:0.8f];
-    [self.refreshButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [self.refreshButton addTarget:self action:@selector(refreshButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.listButton.titleLabel setFont:[UIFont boldSystemFontOfSize:22.0f]];
-    [self.listButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
-    [self.listButton setAlpha:0.8f];
-    [self.listButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [self.listButton setGlyphNamed:@"fontawesome##external-link"];
-    [self.listButton addTarget:self action:@selector(listButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    
+    //
+    // MKMapView initialization.
+    //
     // Initially, I took the approach of detecting region updates in the MapView delegate's regionDidChangeAnimated
     // method.  However, that method is called multiple times for each gesture, resulting in unnecessary calls to the
     // API. Another way of accomplishing the same thing is to add custom gesture recognizer to this controller and
@@ -137,20 +163,58 @@ static double const kDefaultRadiusInMeters = 10000;
                                              initWithTarget:self
                                              action:@selector(didDragMap:)];
     [panRecognizer setDelegate:self];
-    [self.mapView addGestureRecognizer:panRecognizer];
     
     UIPinchGestureRecognizer *pinchRecognizer = [[UIPinchGestureRecognizer alloc]
                                                  initWithTarget:self
                                                  action:@selector(didPinchMap:)];
     [pinchRecognizer setDelegate:self];
-    [self.mapView addGestureRecognizer:pinchRecognizer];
-    [self.mapView setDelegate:self];
     
+    self.mapView = [[MKMapView alloc] initWithFrame:CGRectZero];
+    [self.mapView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.mapView setShowsUserLocation:NO];
+    [self.mapView addGestureRecognizer:pinchRecognizer];
+    [self.mapView addGestureRecognizer:panRecognizer];
+    [self.mapView setDelegate:self];
+    [self.view addSubview:self.mapView];
+    
+    //
+    // Initialize the list and refresh buttons
+    //
+    self.listButton = [[UIButton alloc] initWithFrame:CGRectZero];
+    [self.listButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.listButton setBackgroundColor:[UIColor whiteColor]];
+    [self.listButton.layer setBorderColor:[UIColor lightGrayColor].CGColor];
+    [self.listButton.layer setBorderWidth:1.0f];
+    [self.listButton.titleLabel setFont:[UIFont boldSystemFontOfSize:22.0f]];
+    [self.listButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [self.listButton setAlpha:0.8f];
+    [self.listButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.listButton setGlyphNamed:@"fontawesome##external-link"];
+    [self.listButton addTarget:self action:@selector(listButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.listButton];
+    
+
+    self.refreshButton = [[UIButton alloc] initWithFrame:CGRectZero];
+    [self.refreshButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.refreshButton setBackgroundColor:[UIColor whiteColor]];
+    [self.refreshButton.layer setBorderColor:[UIColor lightGrayColor].CGColor];
+    [self.refreshButton.layer setBorderWidth:1.0f];
+    [self.refreshButton.titleLabel setFont:[UIFont boldSystemFontOfSize:22.0f]];
+    [self.refreshButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [self.refreshButton setAlpha:0.8f];
+    [self.refreshButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.refreshButton setGlyphNamed:@"fontawesome##refresh"];
+    [self.refreshButton addTarget:self action:@selector(refreshButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.refreshButton setHidden:YES];
+    [self.view addSubview:self.refreshButton];
+    
+    //
     // Initialize the location manager.
+    //
     locationManager = [[CLLocationManager alloc] init];
     [locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
     [locationManager setDistanceFilter:kDistanceFilter];
-    [locationManager setDelegate:self];    
+    [locationManager setDelegate:self];
     
     [[PRXPreferences sharedInstance] addObserver:self forKeyPath:@"fuels" options:0 context:nil];
     
@@ -183,16 +247,14 @@ static double const kDefaultRadiusInMeters = 10000;
     
     // Let's get this party started.
     [self updateLocation:nil];
-}
-
-
-- (void)viewDidLayoutSubviews {
-    // TODO: this should only be performed once.
-    CALayer *layer = [CALayer layer];
-    layer.frame = CGRectMake(0.0f, self.toolbar.bounds.size.height - 1, self.toolbar.bounds.size.width, 1.0f);
-    [layer setBackgroundColor:[UIColor lightGrayColor].CGColor];
-    [self.toolbar.layer addSublayer:layer];
     
+    /*
+    
+
+    
+
+    
+     */
 }
 
 
@@ -355,7 +417,9 @@ static double const kDefaultRadiusInMeters = 10000;
     NSString *path = @"alt-fuel-stations/v1/nearest.json";
     //float radiusInMiles = kDefaultRadiusInMeters * 0.000621371;
     
-    NSDictionary *params = @{@"api_key": @"2cb264fc3ffee5c6aff826a024ffb4fd637e52e0",
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Keys" ofType:@"plist"];
+    NSDictionary *plistDictionary = [[NSDictionary alloc] initWithContentsOfFile:plistPath];    
+    NSDictionary *params = @{@"api_key": plistDictionary[@"NREL API Key"],
                              @"latitude": [NSNumber numberWithFloat:region.center.latitude],
                              @"longitude": [NSNumber numberWithFloat:region.center.longitude],
                              @"radius": [NSNumber numberWithFloat:radiusInMiles],
@@ -401,7 +465,7 @@ static double const kDefaultRadiusInMeters = 10000;
         annotationView = (MKPinAnnotationView *) [self.mapView dequeueReusableAnnotationViewWithIdentifier: identifier];
         if (!annotationView) {
             annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier: identifier];
-            annotationView.pinColor = MKPinAnnotationColorGreen;
+            annotationView.pinColor = MKPinAnnotationColorRed;
             //annotationView.image=[UIImage imageNamed:@"arrest.png"] ;
             [annotationView setEnabled:YES];
             annotationView.userInteractionEnabled = YES;
