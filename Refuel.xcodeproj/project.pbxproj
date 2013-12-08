@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		93342E221854291900891D4A /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 93342E211854291900891D4A /* Keys.plist */; };
+		93342E2418543CC600891D4A /* Keys.plist.example in Resources */ = {isa = PBXBuildFile; fileRef = 93342E2318543CC600891D4A /* Keys.plist.example */; };
 		9335F6A917FFD85900C104C3 /* PRXLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9335F6A817FFD85900C104C3 /* PRXLabel.m */; };
 		934FEBF017CD5FCC0091161D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 934FEBEF17CD5FCC0091161D /* UIKit.framework */; };
 		934FEBF217CD5FCC0091161D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 934FEBF117CD5FCC0091161D /* Foundation.framework */; };
@@ -60,6 +61,7 @@
 
 /* Begin PBXFileReference section */
 		93342E211854291900891D4A /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
+		93342E2318543CC600891D4A /* Keys.plist.example */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Keys.plist.example; sourceTree = "<group>"; };
 		9335F6A717FFD85900C104C3 /* PRXLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRXLabel.h; sourceTree = "<group>"; };
 		9335F6A817FFD85900C104C3 /* PRXLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRXLabel.m; sourceTree = "<group>"; };
 		934FEBEC17CD5FCB0091161D /* Refuel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Refuel.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -213,6 +215,7 @@
 				934FEBF817CD5FCC0091161D /* InfoPlist.strings */,
 				934FEBFB17CD5FCC0091161D /* main.m */,
 				934FEBFD17CD5FCC0091161D /* Refuel-Prefix.pch */,
+				93342E2318543CC600891D4A /* Keys.plist.example */,
 				93342E211854291900891D4A /* Keys.plist */,
 			);
 			name = "Supporting Files";
@@ -425,6 +428,7 @@
 			files = (
 				934FEBFA17CD5FCC0091161D /* InfoPlist.strings in Resources */,
 				934FEC3017CD60B70091161D /* Default-568h@2x.png in Resources */,
+				93342E2418543CC600891D4A /* Keys.plist.example in Resources */,
 				934FEC3117CD60B70091161D /* Default.png in Resources */,
 				934FEC3217CD60B70091161D /* Default@2x.png in Resources */,
 				934FEC6B17CD60DB0091161D /* entypo.plist in Resources */,
